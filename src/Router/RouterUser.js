@@ -63,7 +63,19 @@ function endPointRouterUser(router){
             const friendsbooktoken = jwt.sign({id:user.correo}, process.env.SECRET_TOKEN,{expiresIn:60*60*24})//creamos el token y que expire en 1 dia
             res.status(200).json({success:true, data:data, friendsbooktoken:friendsbooktoken})
         })
-    })
+    });
+
+    //usuario por id ruta -> http://localhost:3001/api/getUserById/:id
+    router.get('/getUserById/:id', (req, res) => {
+        let id = req.params.id;
+
+        Database.getUserById(id, (err, data) => {
+            if(err) return res.status(500).json({success: false, message:`Error al realizar la peticion:${err}`});
+            if(!data) return res.status(404).json({success:false, message:`Error al devolver los datos`});
+
+            res.status(200).json({success:true, data:data})
+        })
+    });
 }
 
 module.exports = endPointRouterUser;
