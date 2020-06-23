@@ -66,6 +66,7 @@ const getUserById = (id, callback) => {
     // conexion.end();
 }
 
+
 module.exports = 
     {
         getAllUsers,
