@@ -34,8 +34,25 @@ const addUser = (user, callback) => {
     // conexion.end();
 }
 
+//login
+const login = (user, callback) => {
+    // conexion.connect();
+    if(conexion){
+        conexion.query(`SELECT * FROM usuarios WHERE correo = ${conexion.escape(user.correo)} AND clave = ${conexion.escape(user.clave)}`, (err, res) => {
+            if(err){
+                console.log(err.code);
+                callback(err, res);
+            }else{
+                callback(null, res);
+            }
+        })
+    }
+    // conexion.end();
+}
+
 module.exports = 
     {
         getAllUsers,
-        addUser
+        addUser,
+        login
     }

@@ -1,6 +1,6 @@
 ## (back-end) FriendsBook
 
-FriendsBook es una red social de subir fotosa y videos (clon de facebook)
+FriendsBook es una red social de subir fotosa y videos (clon de facebook, en construccion)
 
 <img src="https://github.com/crislaez/Front_End_Friendsbook/blob/master/src/Img/foto_proyecto.PNG" />
 <hr>
