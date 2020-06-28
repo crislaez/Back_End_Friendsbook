@@ -22,7 +22,8 @@ function endPointRouterImage(router){
                 id_imagenes:'',
                 id_usuario:req.body.id_usuario,
                 imagen:process.env.RUTA+'/Img/'+aux[num-1],
-                titulo_imagen:req.body.titulo_imagen
+                titulo_imagen:req.body.titulo_imagen,
+                fecha_imagen:req.body.fecha_imagen
             }
 
         Database.addImage(image, (err, data) => {
@@ -44,6 +45,31 @@ function endPointRouterImage(router){
             res.status(200).json({success:true, data:data});
         })
     });
+
+    //mostrar una imagen ruta -> http://localhost:3001/api/getImageByIdImage/:id
+    router.get('/getImageByIdImage/:id', (req, res) => {
+        let id = req.params.id;
+
+        Database.getImageByIdImage(id, (err, data) => {
+            if(err) return res.status(500).json({success:false, message:`Error al realizar la peticion:${err}`});
+            if(!data) return res.status(404).json({success:false, message:`Error al devolver los datos`});
+
+            res.status(200).json({success:true, data:data})
+        })
+    });
+
+    //borrar una imagen ruta -> http://localhost:3001/api/deteleImageByIdImage/:id
+    router.delete('/deteleImageByIdImage/:id',authFunction,(req, res) => {
+        let id = req.params.id;
+
+        Database.deteleImageByIdImage(id, (err, data) => {
+            if(err) return res.status(500).json({success:false, message:`Error al realizar la peticion:${err}`});
+            if(!data) return res.status(404).json({success:false, message:`Error al devolver los datos`});
+
+            res.status(200).json({success:true, data:data});
+        })
+    })
+
 }
 
 module.exports = endPointRouterImage;
