@@ -21,6 +21,18 @@ function endPointRouterComent(router){
 
             res.status(200).json({success:true, data:data});
         })
+    });
+
+    //comentarios por imagen ruta -> http://localhost:3001/api/getComentsByIdImage/:id
+    router.get('/getComentsByIdImage/:id', (req, res) => {
+        let id = req.params.id;
+
+        Database.getComentsByIdImage(id, (err, data) => {
+            if(err) return res.status(500).json({success:false, message:`Error al realizar la peticion:${err}`});
+            if(!data) return res.status(404).json({success:false, mesasge:`Error al devolver los comentarios`});
+
+            res.status(200).json({success:true, data:data});
+        })
     })
 }
 
