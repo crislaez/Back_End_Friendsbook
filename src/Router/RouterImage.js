@@ -68,7 +68,18 @@ function endPointRouterImage(router){
 
             res.status(200).json({success:true, data:data});
         })
+    });
+
+    //mostrar todas las imagenes ruta -> http://localhost:3001/api/getAllImage
+    router.get('/getAllImage', (req, res) => {
+        Database.getAllImage((err, data) => {
+            if(err) return res.status(500).json({success:false, message:`Error al realizar la peticion:${err}`});
+            if(!data) return res.status(404).json({success:false, message:`Error al devolver los datos`});
+
+            res.status(200).json({success:true, data:data})
+        })
     })
+
 
 }
 

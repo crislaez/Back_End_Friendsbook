@@ -66,10 +66,27 @@ const deteleImageByIdImage = (id, callback) => {
     // conexion.end();
 };
 
+//conseguir todas las imagenes
+const getAllImage = (callback) => {
+    // conexion.connect();
+    if(conexion){
+        conexion.query(`SELECT imagenes.id_imagenes, imagenes.id_usuario, imagenes.imagen, imagenes.titulo_imagen, imagenes.fecha_imagen, usuarios.id_usuario, usuarios.nombre, usuarios.apellido, usuarios.avatar  FROM imagenes INNER JOIN usuarios ON imagenes.id_usuario = usuarios.id_usuario`, (err, res) => {
+            if(err){
+                console.log(err.code);
+                callback(err, res);
+            }else{
+                callback(null, res);
+            }
+        })
+    }
+    // conexion.end();
+}
+
 module.exports = 
     {
         addImage,
         getImageByIdUser,
         getImageByIdImage,
-        deteleImageByIdImage
+        deteleImageByIdImage,
+        getAllImage
     }
