@@ -65,12 +65,28 @@ const getUserById = (id, callback) => {
     }
     // conexion.end();
 }
-
+// SELECT * FROM `usuarios` WHERE nombre = '' OR apellido = ''
+//buscar usuarios
+const getUserBySearch = (nombre, apellido, callback) =>{
+    // conexion.connect();
+    if(conexion){
+        conexion.query(`SELECT id_usuario, avatar, nombre, apellido  FROM usuarios WHERE nombre LIKE ${conexion.escape(nombre)} OR apellido LIKE ${conexion.escape(apellido)}`, (err, res) => {
+            if(err){
+                console.log(err.code);
+                callback(err, res);
+            }else{
+                callback(null, res);
+            }
+        })
+    }
+    // conexion.end();
+}
 
 module.exports = 
     {
         getAllUsers,
         addUser,
         login,
-        getUserById
+        getUserById,
+        getUserBySearch
     }

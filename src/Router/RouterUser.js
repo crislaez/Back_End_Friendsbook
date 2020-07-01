@@ -76,6 +76,19 @@ function endPointRouterUser(router){
             res.status(200).json({success:true, data:data})
         })
     });
+    
+     //buscar usuarios ruta -> http://localhost:3001/api/getUserBySearch/:id/:id2
+     router.get('/getUserBySearch/:id/:id2', (req, res) => {
+         let nombre = req.params.id;
+         let apellido = req.params.id2;
+
+         Database.getUserBySearch(nombre, apellido, (err, data) => {
+             if(err) return res.status(500).json({success: false, message:`Error al realizar la peticion:${err}`});
+             if(!data) return res.status(404).json({success: false, message: `Error al devolver los datos`});
+
+             res.status(200).json({success:true, data:data});
+         })
+     });
 }
 
 module.exports = endPointRouterUser;
