@@ -46,6 +46,18 @@ function endPointRouterFollow(router){
 
             res.status(200).json({success:true, data:data});
         })
+    });
+
+    //usuarios que se suigue ruta -> http://localhost:3001/api/getFollowUsers/:id
+    router.get('/getFollowUsers/:id',(req, res) => {
+        let id = req.params.id;
+        
+        Database.getFollowUsers(id, (err, data) => {
+            if(err) return res.status(500).json({success:false, message:`Error al realizar la peticion:${err}`});
+            if(!data) return res.status(404).json({success:false, message:`Error al devolver el seguimiento`});
+
+            res.status(200).json({success:true, data:data})
+        })
     })
 }
 

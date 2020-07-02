@@ -50,9 +50,26 @@ const unFollow = (id, id2, callback) => {
     // conexion.end();
 }
 
+//usuarios que se suige
+const getFollowUsers = (id, callback) => {
+    // conexion.connect();
+    if(conexion){
+        conexion.query(`SELECT usuarios.id_usuario, usuarios.nombre, usuarios.apellido, usuarios.avatar,seguir.id_usuario_seguidor FROM seguir INNER JOIN usuarios ON seguir.id_usuario_seguido = usuarios.id_usuario WHERE seguir.id_usuario_seguidor = ${conexion.escape(id)}`, (err, res) => {
+            if(err){
+                console.log(err.code);
+                callback(err, res);
+            }else{
+                callback(null, res);
+            }
+        })
+    }
+    // conexion.end();
+}
+
 module.exports = 
     {
         addFollow,
         chechkFollow,
-        unFollow
+        unFollow,
+        getFollowUsers
     }
