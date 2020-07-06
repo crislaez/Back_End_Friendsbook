@@ -8,6 +8,7 @@ const endPointRouterUser = require('./Router/RouterUser');
 const endPointRouterImage = require('./Router/RouterImage');
 const endPointRouterComent = require('./Router/RouterComent');
 const endPointRouterFollow = require('./Router/RouterFollow');
+const endPointRouterChat = require('./Router/RouterChat');
 
 const app = express();
 app.use(express.urlencoded({extended:false}));
@@ -31,5 +32,6 @@ endPointRouterUser(router);
 endPointRouterImage(router);
 endPointRouterComent(router);
 endPointRouterFollow(router);
+endPointRouterChat(router);
 
 app.listen(process.env.PORT,() => {console.log(`Api Rest corriendo en:${process.env.RUTA}`)})
