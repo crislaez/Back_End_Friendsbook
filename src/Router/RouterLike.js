@@ -52,7 +52,19 @@ function endPoinRouterLike(router){
 
             res.status(200).json({success:true, data:data});
         })
-    })
+    });
+
+     //remover like ruta -> http://localhost:3001/api/countLike/:id
+     router.get('/countLike/:id', (req, res) => {
+         let id_imagenes = req.params.id;
+
+         Database.countLike(id_imagenes,(err, data) => {
+            if(err) return res.status(500).json({success:false, message:`Error al realizar la peticion`});
+            if(!data) return res.status(404).json({success:false, message:`Error al remover el like`});
+
+            res.status(200).json({success:true, data:data});
+         })
+     })
 
 }
 

@@ -50,9 +50,26 @@ const removeLike = (like, callback) => {
     // conection.end();
 }
 
+//contar cantida de likes
+const countLike = (id_imagenes, callback) => {
+    // conection.connect();
+    if(conection){
+        conection.query(`SELECT COUNT(*) AS files FROM megusta WHERE id_imagenes = ${conection.escape(id_imagenes)}`, (err, res) => {
+            if(err){
+                console.log(err.code);
+                callback(err, res);
+            }else{
+                callback(null, res);
+            }
+        })
+    }
+    // conection.end();
+}
+
 module.exports = 
     {
         addLike,
         checkLike,
-        removeLike
+        removeLike,
+        countLike
     }
